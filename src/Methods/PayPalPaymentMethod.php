@@ -28,6 +28,7 @@ class PayPalPaymentMethod extends AbstractPaymentMethod
      */
     public function getName(): string
     {
+        return "paypaltest";
         $title = $this->configRepo->get('wallee.paypal_title');
         if (! empty($title)) {
             return $title;
