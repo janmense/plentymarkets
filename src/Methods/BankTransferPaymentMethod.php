@@ -58,7 +58,7 @@ class BankTransferPaymentMethod extends AbstractPaymentMethod
      */
     public function getIcon(): string
     {
-        return "https://app-wallee.com//s/2415/resource/web/image/pp2.svg";
+        return $this->getImagePath('bank-transfer.svg');
     }
 
     /**
