@@ -55,7 +55,7 @@ class InvoicePaymentMethod extends AbstractPaymentMethod
      */
     public function getIcon(): string
     {
-        return $this->getImagePath('invoice.svg');
+        return "https://app-wallee.com/en-US/s/2415/resource/web/image/pp2.svg?strategy=snapshot&snapshot=53853";
     }
 
     /**
