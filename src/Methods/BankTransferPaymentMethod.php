@@ -58,6 +58,7 @@ class BankTransferPaymentMethod extends AbstractPaymentMethod
      */
     public function getIcon(): string
     {
+        $this->getLogger(__METHOD__)->info('phpoversion', phpversion());
         return $this->getImagePath('paypal.svg');
     }
 
