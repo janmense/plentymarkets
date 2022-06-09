@@ -37,7 +37,7 @@
 		"IO": ">=3.0.0"
 	},
 	"dependencies": {
-		"wallee/sdk": "2.0.11"
+		"wallee/sdk": "3.0.2"
 	},
 	"runOnBuild": [
 		"Wallee\\Migrations\\CreatePaymentMethods",
