@@ -55,11 +55,11 @@ class CreditDebitCardPaymentMethod extends AbstractPaymentMethod
      */
    public function getIcon(): string
     {
-        $iconUrl = $this->configRepo->get('whiteLabelMachineName.creditcard_icon_url');
+        $iconUrl = $this->configRepo->get('wallee.creditcard_icon_url');
         if (! empty($iconUrl)) {
             return $iconUrl;
         } else { 
-            return $this->getImagePath('creditcard.svg');
+            return $this->getImagePath('credit-debit-card.svg');
         }  
     } 
 
