@@ -201,6 +201,14 @@
                     "required": false,
                     "label": "Config.creditcardFeeLabel",
                     "options": {}
+                },
+                "creditcard_icon_url": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.creditcardIconUrlLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
                 }
             }
         },
