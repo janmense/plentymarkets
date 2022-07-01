@@ -76,7 +76,7 @@ class PayPalPaymentMethod extends AbstractPaymentMethod
         $iconUrl = $this->configRepo->get('whiteLabelMachineName.paypal_icon_url');
         if (! empty($iconUrl)) {
             return $iconUrl;
-        } else 
+        } else { 
             return $this->getImagePath('paypal.svg');
         }  
     }
