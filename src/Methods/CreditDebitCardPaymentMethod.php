@@ -58,7 +58,7 @@ class CreditDebitCardPaymentMethod extends AbstractPaymentMethod
         $iconUrl = $this->configRepo->get('whiteLabelMachineName.creditcard_icon_url');
         if (! empty($iconUrl)) {
             return $iconUrl;
-        } else 
+        } else { 
             return $this->getImagePath('creditcard.svg');
         }  
     } 
