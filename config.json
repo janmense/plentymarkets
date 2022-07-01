@@ -630,7 +630,14 @@
                     "required": false,
                     "label": "Config.paypalFeeLabel",
                     "options": {}
-                }
+                },
+                "paypal_icon_url": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.paypalIconUrlLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
             }
         },
         "Config.paysafecardTab": {
