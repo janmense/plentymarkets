@@ -156,11 +156,12 @@ class PaymentHelper
 
     public function updatePlentyPayment($transaction)
     {
-        throw new \Exception(json_encode($transaction));
         $payments = $this->paymentRepository->getPaymentsByPropertyTypeAndValue(PaymentProperty::TYPE_TRANSACTION_ID, $transaction['id']);
 
         $state = $this->mapTransactionState($transaction['state']);
-        echo $transaction['state'];
+        $this->getLogger(__METHOD__)->error('updatepayments', $payments);
+        $this->getLogger(__METHOD__)->error('state', $state);
+        $this->getLogger(__METHOD__)->error('transaction', $transaction);
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
