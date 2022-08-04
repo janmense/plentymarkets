@@ -162,6 +162,8 @@ class PaymentHelper
         $this->getLogger(__METHOD__)->error('updatepayments', $payments);
         $this->getLogger(__METHOD__)->error('state', $state);
         $this->getLogger(__METHOD__)->error('transaction', $transaction);
+        $this->getLogger(__METHOD__)->error('paymentstatuscaptured', Payment::STATUS_CAPTURED);
+
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
