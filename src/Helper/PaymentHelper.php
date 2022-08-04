@@ -159,7 +159,7 @@ class PaymentHelper
         $payments = $this->paymentRepository->getPaymentsByPropertyTypeAndValue(PaymentProperty::TYPE_TRANSACTION_ID, $transaction['id']);
 
         $state = $this->mapTransactionState($transaction['state']);
-        var_dump($payments);
+        $this->getLogger(__METHOD__)->info('updatepayments', $payments);
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */

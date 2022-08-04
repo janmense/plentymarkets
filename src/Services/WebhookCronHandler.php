@@ -78,7 +78,7 @@ class WebhookCronHandler extends CronHandler
 
     protected function processWebhook(Webhook $webhook)
     {
-        var_dump($webhook);
+        $this->getLogger(__METHOD__)->info('processWebhook', $webhook);
         if (strtolower($webhook->listenerEntityTechnicalName) == 'transaction') {
             $transactionId = $webhook->entityId;
             $transaction = $this->sdkService->call('getTransaction', [
