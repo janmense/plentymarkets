@@ -64,6 +64,7 @@ class WebhookCronHandler extends CronHandler
     public function handle()
     {
         foreach ($this->webhookRepository->getWebhookList() as $webhook) {
+            $this->getLogger(__METHOD__)->info('postdata', $_POST);
             try {
                 $this->getLogger(__METHOD__)->info('processWebhook', $webhook);
                 $result = $this->processWebhook($webhook);
