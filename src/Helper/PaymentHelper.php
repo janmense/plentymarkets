@@ -160,6 +160,11 @@ class PaymentHelper
 
         $state = $this->mapTransactionState($transaction['state']);
         $this->getLogger(__METHOD__)->error('updatepayments', $payments);
+        $this
+            ->getLogger('updatePlentyPayment')
+            ->setReferenceType('transactionstate')
+            ->setReferenceValue($transaction['state'])
+            ->info('ToDoList::migration.createToDoInformation', ['trasnid' => $transaction['state'] ]);
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
