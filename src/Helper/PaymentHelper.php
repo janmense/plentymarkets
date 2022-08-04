@@ -169,10 +169,10 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state != Payment::STATUS_APPROVED) {
-                    $payment->unaccountable = 1;
+                if ($state == Payment::STATUS_APPROVED) {
+                    $payment->unaccountable = 0;
+                    $payment->updateOrderPaymentStatus = true;
                 }
-                $payment->updateOrderPaymentStatus = true;
                 $this->paymentRepository->updatePayment($payment);
             }
         }
@@ -202,10 +202,10 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state != Payment::STATUS_APPROVED) {
+                if ($state == Payment::STATUS_APPROVED) {
                     $payment->unaccountable = 0;
+                    $payment->updateOrderPaymentStatus = true;
                 }
-                $payment->updateOrderPaymentStatus = true;
                 $this->paymentRepository->updatePayment($payment);
             }
         }
