@@ -167,9 +167,12 @@ class PaymentHelper
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
+            $this->getLogger(__METHOD__)->error('status=state', $payment->status != $state);
             if ($payment->status != $state) {
+                $this->getLogger(__METHOD__)->error('inside', 'state != status');
                 $payment->status = $state;
                 if ($state == Payment::STATUS_APPROVED) {
+                    $this->getLogger(__METHOD__)->error('statusapproved', 'status approved');
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
