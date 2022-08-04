@@ -159,12 +159,7 @@ class PaymentHelper
         $payments = $this->paymentRepository->getPaymentsByPropertyTypeAndValue(PaymentProperty::TYPE_TRANSACTION_ID, $transaction['id']);
 
         $state = $this->mapTransactionState($transaction['state']);
-        $this->getLogger(__METHOD__)->error('updatepayments', $payments);
-        $this
-            ->getLogger('updatePlentyPayment')
-            ->setReferenceType('transactionstate')
-            ->setReferenceValue($transaction['state'])
-            ->info('ToDoList::migration.createToDoInformation', ['trasnid' => $transaction['state'] ]);
+        echo $transaction['state'];
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
