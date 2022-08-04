@@ -176,6 +176,7 @@ class PaymentHelper
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
+                $this->getLogger(__METHOD__)->error('paymentobject', $payment);
                 $this->paymentRepository->updatePayment($payment);
             }
         }
