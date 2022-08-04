@@ -156,6 +156,7 @@ class PaymentHelper
 
     public function updatePlentyPayment($transaction)
     {
+        throw new \Exception(json_encode($transaction));
         $payments = $this->paymentRepository->getPaymentsByPropertyTypeAndValue(PaymentProperty::TYPE_TRANSACTION_ID, $transaction['id']);
 
         $state = $this->mapTransactionState($transaction['state']);
