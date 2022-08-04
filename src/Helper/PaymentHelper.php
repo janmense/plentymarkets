@@ -169,7 +169,7 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state == Payment::STATUS_CAPTURED) {
+                if ($state == Payment::STATUS_APPROVED) {
                     $payment->unaccountable = 1;
                     $payment->updateOrderPaymentStatus = true;
                 }
@@ -185,14 +185,14 @@ class PaymentHelper
         if ($transactionInvoice['state'] == 'NOT_APPLICABLE') {
             $transactionState = $transactionInvoice['completion']['lineItemVersion']['transaction']['state'];
             if ($transactionState == 'FULFILL') {
-                $state = Payment::STATUS_CAPTURED;
+                $state = Payment::STATUS_APPROVED;
             } elseif ($transactionState == 'DECLINE' || $transactionState == 'VOIDED' || $transactionState == 'FAILED') {
                 return true;
             } else {
                 return false;
             }
         } elseif ($transactionInvoice['state'] == 'PAID') {
-            $state = Payment::STATUS_CAPTURED;
+            $state = Payment::STATUS_APPROVED;
         } else {
             $state = Payment::STATUS_REFUSED;
         }
@@ -202,7 +202,7 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state == Payment::STATUS_CAPTURED) {
+                if ($state == Payment::STATUS_APPROVED) {
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
