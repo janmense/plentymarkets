@@ -164,7 +164,7 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state == Payment::STATUS_FULFILL) {
+                if ($state == Payment::STATUS_CAPTURED) {
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
@@ -180,14 +180,14 @@ class PaymentHelper
         if ($transactionInvoice['state'] == 'NOT_APPLICABLE') {
             $transactionState = $transactionInvoice['completion']['lineItemVersion']['transaction']['state'];
             if ($transactionState == 'FULFILL') {
-                $state = Payment::STATUS_FULFILL;
+                $state = Payment::STATUS_CAPTURED;
             } elseif ($transactionState == 'DECLINE' || $transactionState == 'VOIDED' || $transactionState == 'FAILED') {
                 return true;
             } else {
                 return false;
             }
         } elseif ($transactionInvoice['state'] == 'PAID') {
-            $state = Payment::STATUS_FULFILL;
+            $state = Payment::STATUS_CAPTURED;
         } else {
             $state = Payment::STATUS_REFUSED;
         }
@@ -197,7 +197,7 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state == Payment::STATUS_FULFILL) {
+                if ($state == Payment::STATUS_CAPTURED) {
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
@@ -259,9 +259,9 @@ class PaymentHelper
             case 'VOIDED':
                 return Payment::STATUS_REFUSED;
             case 'COMPLETED':
-                return Payment::STATUS_APPROVED;
+                return Payment::STATUS_CAPTURED;
             case 'FULFILL':
-                return Payment::STATUS_FULFILL;
+                return Payment::STATUS_CAPTURED;
             case 'DECLINE':
                 return Payment::STATUS_REFUSED;
         }
