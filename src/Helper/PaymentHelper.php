@@ -159,24 +159,15 @@ class PaymentHelper
         $payments = $this->paymentRepository->getPaymentsByPropertyTypeAndValue(PaymentProperty::TYPE_TRANSACTION_ID, $transaction['id']);
 
         $state = $this->mapTransactionState($transaction['state']);
-        $this->getLogger(__METHOD__)->error('updatepayments', $payments);
-        $this->getLogger(__METHOD__)->error('state', $state);
-        $this->getLogger(__METHOD__)->error('transaction', $transaction);
-        $this->getLogger(__METHOD__)->error('paymentstatuscaptured', Payment::STATUS_CAPTURED);
-
 
         foreach ($payments as $payment) {
             /* @var Payment $payment */
-            $this->getLogger(__METHOD__)->error('status=state', $payment->status != $state);
             if ($payment->status != $state) {
-                $this->getLogger(__METHOD__)->error('inside', 'state != status');
                 $payment->status = $state;
-                if ($state == Payment::STATUS_APPROVED) {
-                    $this->getLogger(__METHOD__)->error('statusapproved', 'status approved');
+                if ($state == Payment::STATUS_FULFILL) {
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
-                $this->getLogger(__METHOD__)->error('paymentobject', $payment);
                 $this->paymentRepository->updatePayment($payment);
             }
         }
@@ -189,14 +180,14 @@ class PaymentHelper
         if ($transactionInvoice['state'] == 'NOT_APPLICABLE') {
             $transactionState = $transactionInvoice['completion']['lineItemVersion']['transaction']['state'];
             if ($transactionState == 'FULFILL') {
-                $state = Payment::STATUS_APPROVED;
+                $state = Payment::STATUS_FULFILL;
             } elseif ($transactionState == 'DECLINE' || $transactionState == 'VOIDED' || $transactionState == 'FAILED') {
                 return true;
             } else {
                 return false;
             }
         } elseif ($transactionInvoice['state'] == 'PAID') {
-            $state = Payment::STATUS_APPROVED;
+            $state = Payment::STATUS_FULFILL;
         } else {
             $state = Payment::STATUS_REFUSED;
         }
@@ -206,7 +197,7 @@ class PaymentHelper
             /* @var Payment $payment */
             if ($payment->status != $state) {
                 $payment->status = $state;
-                if ($state == Payment::STATUS_APPROVED) {
+                if ($state == Payment::STATUS_FULFILL) {
                     $payment->unaccountable = 0;
                     $payment->updateOrderPaymentStatus = true;
                 }
@@ -270,7 +261,7 @@ class PaymentHelper
             case 'COMPLETED':
                 return Payment::STATUS_APPROVED;
             case 'FULFILL':
-                return Payment::STATUS_APPROVED;
+                return Payment::STATUS_FULFILL;
             case 'DECLINE':
                 return Payment::STATUS_REFUSED;
         }
