@@ -2,6 +2,7 @@
     "formatVersion": 1,
     "menu": {
         "Config.GrundeinstellungenTab": {
+            
             "label": "Config.GrundeinstellungenTab",
             "formFields": {
                 "api_user_id": {
